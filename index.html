@@ -17,7 +17,7 @@
             padding: 20px;
             background-color: #f0f0f0;
             margin: 0;
-            min-height: 100vh;
+            min-height: 90vh;
         }
         #output {
             font-size: 20px;
@@ -60,6 +60,68 @@
             width: 80%;
             margin: 10px 0;
         }
+                #installButton {
+            display: none; /* Sakrij gumb po defaultu - JS ga prikazuje */
+            position: fixed; /* Fiksna pozicija na dnu ekrana */
+            bottom: 20px; /* Udaljenost od dna */
+            left: 50%;
+            transform: translateX(-50%); /* Centriranje */
+            padding: 15px 30px;
+            background-color: #007bff; /* Moderna plava boja */
+            color: white;
+            border: none;
+            border-radius: 50px; /* Zaobljeni "pilula" oblik */
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Izražena sjena */
+            z-index: 1000; /* Osiguraj da je iznad ostalog sadržaja */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #installButton:hover {
+            background-color: #0056b3;
+            transform: translateX(-50%) translateY(-2px); /* Lagani pomak na hover */
+        }
+
+        #appVersion {
+            position: fixed; /* Fiksna pozicija */
+            bottom: 5px; /* Nešto iznad install gumba */
+            left: 10px; /* U donjem lijevom kutu */
+            font-size: 12px;
+            color: #777;
+            z-index: 999; /* Ispod install gumba */
+        }
+
+        /* NOVI STIL ZA OBAVIJEST O AŽURIRANJU */
+        #updateNotification {
+            display: none; /* Sakrij po defaultu */
+            position: fixed;
+            bottom: 80px; /* Iznad installButtona */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffc107; /* Žuta boja upozorenja */
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            text-align: center;
+            font-size: 16px;
+        }
+        #updateNotification button {
+            background-color: #28a745; /* Zelena za osvježavanje */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #updateNotification button:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -70,6 +132,14 @@
     <input type="range" id="fontSize" min="20" max="100" value="50" oninput="updateFontSize()" title="Podesi veličinu fonta">
     <div id="output">Tvoj tekst će se prikazati ovdje</div>
 
+    <button type="button" id="installButton">Instaliraj aplikaciju</button>
+
+    
+    <div id="updateNotification">
+        Dostupna je nova verzija aplikacije! <br>
+        <button id="reloadAppButton">Osvježi sada</button>
+    </div>
+    <div id="appVersion"></div>
 
 </body>
 </html>
