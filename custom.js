@@ -1,6 +1,6 @@
 // custom.js
 
-const APP_VERSION = '1.0.5'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!
+const APP_VERSION = '1.0.6'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!
 // --- Funkcije za tvoju aplikaciju ---
 function displayText() {
     const inputText = document.getElementById('inputText').value;
@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- PWA Service Worker Registracija i Logika za "Instaliraj aplikaciju" gumb ---
 
 let deferredPrompt;
+
 const installButton = document.getElementById('installButton');
 const updateNotification = document.getElementById('updateNotification');
 const reloadAppButton = document.getElementById('reloadAppButton');
