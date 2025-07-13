@@ -24,9 +24,10 @@ self.addEventListener('activate', event => {
           }
         })
       );
+    }).then(() => {
+      return self.clients.claim();
     })
   );
-  // self.clients.claim(); // Uklanjamo ovo ako koristimo SKIP_WAITING na poruku
 });
 
 self.addEventListener('install', event => {
@@ -46,8 +47,21 @@ self.addEventListener('install', event => {
 // Dodan listener za poruke
 self.addEventListener('message', event => {
     if (event.data && event.data.type === 'SKIP_WAITING') {
-        self.skipWaiting(); // Ova linija prisiljava novog SW-a da se odmah aktivira
+        self.skipWaiting(); // Prisiljava novog SW-a da se odmah aktivira
         console.log('Service Worker: SKIP_WAITING received, activating immediately.');
+
+        // Opcionalno, ali preporučeno: Pošalji poruku klijentu da se sam osvježi
+        event.waitUntil(
+            self.clients.matchAll({ type: 'window' }).then(clientList => {
+                for (const client of clientList) {
+                    // Provjeri da je to trenutni klijent (aplikacija) i pošalji mu poruku
+                    if (client.url === self.location.origin + '/' && 'focus' in client) { // Prilagodite client.url ako je potrebno za poddirektorij
+                        client.postMessage({ type: 'RELOAD_PAGE' });
+                        break;
+                    }
+                }
+            })
+        );
     }
 });
 
@@ -58,10 +72,8 @@ self.addEventListener('fetch', event => {
         if (response) {
           return response;
         }
-        // Važno: Ako resurs nije u kešu, pokušaj ga dohvatit s mreže
         return fetch(event.request).then(
             networkResponse => {
-                // I dodaj ga u keš za buduće korištenje
                 if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
                     return networkResponse;
                 }
@@ -76,13 +88,6 @@ self.addEventListener('fetch', event => {
       })
       .catch(error => {
         console.error('Service Worker: Fetch failed or item not in cache:', error);
-        // Opcionalno: Možeš vratiti neku offline fallback stranicu za određene zahtjeve
-        // return caches.match('/offline.html');
       })
   );
 });
-// service-worker.js
-
-// ... sav tvoj postojeći kod ...
-
-// Force update: v1.0.21

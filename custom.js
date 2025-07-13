@@ -1,7 +1,6 @@
 // custom.js
 
-const APP_VERSION = '1.0.3'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!// <--- OVDJE SADA MIJENJAŠ VERZIJU!// <--- OVDJE SADA MIJENJAŠ VERZIJU!
-// <--- OVDJE SADA MIJENJAŠ VERZIJU!
+const APP_VERSION = '1.0.5'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!
 // --- Funkcije za tvoju aplikaciju ---
 function displayText() {
     const inputText = document.getElementById('inputText').value;
@@ -82,6 +81,16 @@ if ('serviceWorker' in navigator) {
         console.error('Service Worker registration failed:', err);
       });
   });
+
+// Slušaj poruke od Service Workera
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'RELOAD_PAGE') {
+        console.log('Service Worker requested page reload. Reloading now...');
+        window.location.reload(); // Ovo će prisiliti potpuno osvježavanje stranice
+    }
+  });
+}
 
   // Dodatni listener da odmah aktiviramo novog Service Workera ako postoji
   // i ako korisnik otvori aplikaciju nakon što je nova verzija već instalirana u pozadini
