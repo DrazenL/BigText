@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Povećaj tekst</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="custom.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        #output {
+            font-size: 20px;
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 80%;
+            text-align: center;
+            word-wrap: break-word;
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            margin: 10px 0;
+            position: relative;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            padding-right: 30px; /* Prostor za ikonicu */
+            font-size: 16px;
+        }
+        .clear-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #555;
+        }
+        .clear-btn:hover {
+            color: #ff0000;
+        }
+        input[type="range"] {
+            width: 80%;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <input type="text" id="inputText" placeholder="Upiši tekst ovdje" oninput="displayText()" title="Polje za unos teksta">
+        <button class="clear-btn" onclick="clearInput()">✖</button>
+    </div>
+    <input type="range" id="fontSize" min="20" max="100" value="50" oninput="updateFontSize()" title="Podesi veličinu fonta">
+    <div id="output">Tvoj tekst će se prikazati ovdje</div>
+
+
+</body>
+</html>
