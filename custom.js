@@ -1,6 +1,6 @@
 // custom.js
 
-const APP_VERSION = '1.0.1'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!
+const APP_VERSION = '1.0.2'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!
 
 // --- Funkcije za tvoju aplikaciju ---
 function displayText() {
@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
         appVersionElement.innerText = `Verzija: ${APP_VERSION}`;
     }
 });
-
 
 // --- PWA Service Worker Registracija i Logika za "Instaliraj aplikaciju" gumb ---
 
@@ -102,7 +101,6 @@ if ('serviceWorker' in navigator) {
     }
   });
 
-
   // Slušaj poruke od Service Workera (ako šalje poruke)
   navigator.serviceWorker.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'RELOAD_PAGE') {
@@ -114,7 +112,6 @@ if ('serviceWorker' in navigator) {
 } else {
   console.log('Service Workers are not supported in this browser.');
 }
-
 
 // Logika za "Instaliraj aplikaciju" gumb
 window.addEventListener('beforeinstallprompt', (e) => {
