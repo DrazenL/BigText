@@ -1,6 +1,6 @@
 // custom.js
 
-const APP_VERSION = '1.0.6'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!
+const APP_VERSION = '1.0.7'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!
 // --- Funkcije za tvoju aplikaciju ---
 function displayText() {
     const inputText = document.getElementById('inputText').value;
@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- PWA Service Worker Registracija i Logika za "Instaliraj aplikaciju" gumb ---
-
 let deferredPrompt;
 
 const installButton = document.getElementById('installButton');
@@ -92,7 +91,6 @@ if ('serviceWorker' in navigator) {
     }
   });
 }
-
   // Dodatni listener da odmah aktiviramo novog Service Workera ako postoji
   // i ako korisnik otvori aplikaciju nakon što je nova verzija već instalirana u pozadini
   navigator.serviceWorker.ready.then(registration => {
@@ -161,7 +159,6 @@ if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.
 }
 
 // --- Logika za Osvježavanje Aplikacije ---
-// Kada korisnik klikne na gumb "Osvježi sada"
 if (reloadAppButton) {
     reloadAppButton.addEventListener('click', () => {
         if (newWorker) {
@@ -169,11 +166,8 @@ if (reloadAppButton) {
             newWorker.postMessage({ type: 'SKIP_WAITING' });
             console.log('Sent SKIP_WAITING message to new Service Worker.');
         }
-        // Sakrij obavijest o ažuriranju
         if (updateNotification) {
             updateNotification.style.display = 'none';
         }
-        // Odmah osvježi stranicu (alternativa poruci Service Workeru, ako ovo ne radi odmah)
-        // window.location.reload();
     });
 }
