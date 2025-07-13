@@ -1,7 +1,7 @@
 // custom.js
 
-const APP_VERSION = '1.0.2'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!
-
+const APP_VERSION = '1.0.3'; // <--- OVDJE SADA MIJENJAŠ VERZIJU!// <--- OVDJE SADA MIJENJAŠ VERZIJU!// <--- OVDJE SADA MIJENJAŠ VERZIJU!
+// <--- OVDJE SADA MIJENJAŠ VERZIJU!
 // --- Funkcije za tvoju aplikaciju ---
 function displayText() {
     const inputText = document.getElementById('inputText').value;
